@@ -31,6 +31,7 @@ body {
   align-items: center;
   justify-content: center;
   background: var(--color-bg);
+  user-select: none;
 }
 .calculator {
   width: 309px;
@@ -75,7 +76,7 @@ body {
 }
 
 
-.result {
+.result__body {
   width: 245px;
   height: 80px;
   font-size: 36px;
@@ -88,6 +89,15 @@ body {
   align-items: center;
   justify-content: center;
   box-shadow: var(--box-shadow-result);
+  position: relative;
+}
+.operand {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  color: white;
+  font-size: 12px;
+  font-weight: 400;
 }
 
 .btns {
