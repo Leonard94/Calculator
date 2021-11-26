@@ -32,9 +32,9 @@ let isWaitingNextValue = false
 btns.addEventListener('click', (e) => {
     if (e.target.getAttribute('value') !== null) setCurrentOperand(e.target.getAttribute('value'))
     if (e.target.getAttribute('operator') !== null) setOperator(e.target.getAttribute('operator'))
-    if (e.target.getAttribute('operation') === 'reset') resetBtn()
+    if (e.target.getAttribute('operation') === 'reset') resetAll()
     if (e.target.getAttribute('operation') === 'calc') calcResult()
-    if (e.target.getAttribute('operation') === 'delete') deleteBtn()
+    if (e.target.getAttribute('operation') === 'delete') deleteLastDigit()
 
     // Для тестирования
     console.log(`currentOperand: ${currentOperand}`)
@@ -45,7 +45,7 @@ btns.addEventListener('click', (e) => {
 
 // При вводе числа
 const setCurrentOperand = (number) => {
-    if(currentOperand === '' && number === '0') return
+    if (currentOperand === '' && number === '0') return
     currentOperand += number
     isWaitingNextValue = false
     showOnDisplay(currentOperand)
@@ -98,18 +98,29 @@ const calculateResult = {
 
 const calcResult = () => {
     console.log('Равно')
-    if(firstOperand === 0) return
+    if (firstOperand === 0) return
     firstOperand = String(calculateResult[currentOperator](firstOperand, currentOperand))
     showOnDisplay(firstOperand)
     currentOperand = ''
 }
 
-const deleteBtn = () => {
-    console.log('delete')
+const deleteLastDigit = () => {
+    if(currentOperand === '') return    
+    if(currentOperand.length === 1) {
+        currentOperand = ''
+        showOnDisplay('0')
+        return
+    }
+    currentOperand = currentOperand.slice(0, -1)
+    showOnDisplay(currentOperand)
 }
 
-const resetBtn = () => {
-    console.log('reset')
+const resetAll = () => {
+    currentOperand = ''
+    firstOperand = 0
+    currentOperator = ''
+    isWaitingNextValue = false
+    showOnDisplay('0')
 }
 
 function showOnDisplay(str) {
