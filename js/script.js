@@ -19,7 +19,7 @@ body.addEventListener('click', (e) => {
 */
 
 
-const result = document.querySelector('.result')
+const display = document.querySelector('.result')
 const btns = document.querySelector('.btns')
 const operand = document.querySelector('.operand')
 
@@ -45,8 +45,10 @@ btns.addEventListener('click', (e) => {
 
 // При вводе числа
 const setCurrentOperand = (number) => {
+    if(currentOperand === '' && number === '0') return
     currentOperand += number
     isWaitingNextValue = false
+    showOnDisplay(currentOperand)
 }
 
 const setOperator = (operator) => {
@@ -61,12 +63,14 @@ const setOperator = (operator) => {
         firstOperand = currentOperand
         currentOperand = ''
         currentOperator = operator
+        showOnDisplay('0')
     } else {
         isWaitingSecondNumber = true
+        console.log('Считаем результат')
         // Считаем и заносим результат в переменную currentOperand на случай, если дальше продолжим считать
-        // Результат получаем в number, переводим в строку.
         firstOperand = String(calculateResult[operator](firstOperand, currentOperand))
         currentOperand = ''
+        showOnDisplay(firstOperand)
     }
     isWaitingNextValue = true
     currentOperator = operator
@@ -94,9 +98,9 @@ const calculateResult = {
 
 const calcResult = () => {
     console.log('Равно')
-    
     if(firstOperand === 0) return
     firstOperand = String(calculateResult[currentOperator](firstOperand, currentOperand))
+    showOnDisplay(firstOperand)
     currentOperand = ''
 }
 
@@ -108,6 +112,9 @@ const resetBtn = () => {
     console.log('reset')
 }
 
+function showOnDisplay(str) {
+    display.textContent = `${str}`
+}
 
 
 
