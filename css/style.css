@@ -43,6 +43,7 @@ body {
   border-radius: 28px;
   align-items: center;
   box-shadow: var(--box-shadow-calculator);
+  transition: all 0.5s ease-in;
 }
 .theme-toggle {
   margin-top: 32px;
@@ -54,6 +55,7 @@ body {
   border-radius: 10px;
   background: var(--color-calculator-bg-second);
   box-shadow: var(--box-shadow-calculator);
+  transition: all 0.5s ease-in;
 }
 .theme-toggle label {
   display: inline-block;
@@ -89,6 +91,7 @@ input, .icon {
   justify-content: center;
   box-shadow: var(--box-shadow-result);
   position: relative;
+  transition: all 0.5s ease-in;
 }
 .operand {
   position: absolute;
@@ -109,6 +112,7 @@ input, .icon {
   justify-content: center;
   width: 309px;
   border-radius: 28px;
+  transition: all 0.5s ease-in;
 }
 .btn {
   font-size: 18px;
@@ -122,6 +126,7 @@ input, .icon {
   border-radius: 11px;
   cursor: pointer;
   transition: transform 0.2s ease;
+  transition: background-color 0.5s ease-in;
 }
 .btn[data-operation] {
   color: var(--color-operation);

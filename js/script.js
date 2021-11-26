@@ -3,7 +3,7 @@ const body = document.querySelector('body')
 
 body.addEventListener('click', (e) => {
     if (e.target.nodeName === 'INPUT') {
-        body.classList.remove('light')
+        body.classList.remove('light', 'dark')
         body.classList.add(`${e.target.value}`)
     }
 })
@@ -130,8 +130,9 @@ function showOnDisplay(str) {
 document.addEventListener('keydown', (e) => {
     if (e.key >= 0 || e.key <= 9) setCurrentOperand(e.key)
     if (e.key === '-' || e.key === '+' || e.key === '*' || e.key === '/') setOperator(e.key)
-    if (e.key === 'Backspace') deleteLastDigit()
+    if (e.key === 'Escape') resetAll()
     if (e.key === 'Enter') calcResult()
+    if (e.key === 'Backspace') deleteLastDigit()
 })
 
 
