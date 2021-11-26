@@ -20,7 +20,7 @@ body.addEventListener('click', (e) => {
 
 
 const display = document.querySelector('.result')
-const btns = document.querySelector('.btns')
+const allBtns = document.querySelector('.all-btns')
 const operand = document.querySelector('.operand')
 
 
@@ -29,11 +29,11 @@ let firstOperand = 0
 let currentOperator = ''
 let isWaitingNextValue = false
 
-btns.addEventListener('click', (e) => {
+allBtns.addEventListener('click', (e) => {
     if (e.target.getAttribute('value') !== null) setCurrentOperand(e.target.getAttribute('value'))
     if (e.target.getAttribute('operator') !== null) setOperator(e.target.getAttribute('operator'))
     if (e.target.getAttribute('operation') === 'reset') resetAll()
-    if (e.target.getAttribute('operation') === 'calc') calcResult()
+    if (e.target.getAttribute('operation') === 'equals') calcResult()
     if (e.target.getAttribute('operation') === 'delete') deleteLastDigit()
 
     // Для тестирования
@@ -105,8 +105,8 @@ const calcResult = () => {
 }
 
 const deleteLastDigit = () => {
-    if(currentOperand === '') return    
-    if(currentOperand.length === 1) {
+    if (currentOperand === '') return
+    if (currentOperand.length === 1) {
         currentOperand = ''
         showOnDisplay('0')
         return
@@ -127,6 +127,11 @@ function showOnDisplay(str) {
     display.textContent = `${str}`
 }
 
-
+document.addEventListener('keydown', (e) => {
+    if (e.key >= 0 || e.key <= 9) setCurrentOperand(e.key)
+    if (e.key === '-' || e.key === '+' || e.key === '*' || e.key === '/') setOperator(e.key)
+    if (e.key === 'Backspace') deleteLastDigit()
+    if (e.key === 'Enter') calcResult()
+})
 
 

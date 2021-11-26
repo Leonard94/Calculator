@@ -1,11 +1,11 @@
 body {
-  --color-number: #FFFFFF;
-  --color-operation: #26F0CD;
-  --color-reset-delete: #E26364;
-  --color-bg: #F4F3F3;
-  --color-calculator-bg: #22252D;
+  --color-number: #ffffff;
+  --color-operation: #26f0cd;
+  --color-reset-delete: #e26364;
+  --color-bg: #f4f3f3;
+  --color-calculator-bg: #22252d;
   --color-calculator-bg-second: #313540;
-  --color-icon-active: #FFFFFF;
+  --color-icon-active: #ffffff;
   --box-shadow-hover: 0px 4px 4px rgba(0, 0, 0, 0.1);
   --box-shadow-calculator: none;
   --box-shadow-result: none;
@@ -14,18 +14,18 @@ body {
 body.light {
   --color-number: #313540;
   --color-operation: green;
-  --color-reset-delete: #E26364;
-  --color-bg: #F5F7FA;
-  --color-calculator-bg: #F5F7FA;
-  --color-calculator-bg-second: #F5F7FA;
-  --color-icon-active: #22252D;
-  --box-shadow-hover: 4px 4px 10px #DEE5EF, -4px -4px 10px #FFFFFF;
-  --box-shadow-calculator: 4px 4px 10px #DEE5EF, -4px -4px 10px #FFFFFF;
-  --box-shadow-result: inset -4px -4px 10px #FFFFFF, inset 4px 4px 10px #DEE5EF;
-  --box-shadow-active: inset -4px -4px 10px #FFFFFF, inset 4px 4px 10px #DEE5EF;
+  --color-reset-delete: #e26364;
+  --color-bg: #f5f7fa;
+  --color-calculator-bg: #f5f7fa;
+  --color-calculator-bg-second: #f5f7fa;
+  --color-icon-active: #22252d;
+  --box-shadow-hover: 4px 4px 10px #dee5ef, -4px -4px 10px #ffffff;
+  --box-shadow-calculator: 4px 4px 10px #dee5ef, -4px -4px 10px #ffffff;
+  --box-shadow-result: inset -4px -4px 10px #ffffff, inset 4px 4px 10px #dee5ef;
+  --box-shadow-active: inset -4px -4px 10px #ffffff, inset 4px 4px 10px #dee5ef;
 }
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
   display: flex;
   align-items: center;
@@ -57,6 +57,8 @@ body {
 }
 .theme-toggle label {
   display: inline-block;
+}
+input, .icon {
   cursor: pointer;
 }
 .theme-toggle label:first-child {
@@ -69,13 +71,10 @@ body {
 .icon {
   width: 20px;
   height: 20px;
-  cursor: pointer;
 }
 .theme-toggle input:checked + .icon path {
-    stroke: var(--color-icon-active);
+  stroke: var(--color-icon-active);
 }
-
-
 .result__body {
   width: 245px;
   height: 80px;
@@ -100,7 +99,7 @@ body {
   font-weight: 400;
 }
 
-.btns {
+.all-btns {
   display: grid;
   grid-template-rows: 50px 50px 50px 50px 50px;
   grid-template-columns: 50px 50px 50px 50px;
@@ -128,11 +127,11 @@ body {
   color: var(--color-operation);
 }
 
-.btn[data-operation = '='] {
+.btn[data-operation="="] {
   grid-row-start: span 2;
 }
-.btn[data-operation='reset'],
-.btn[data-operation='delete'] {
+.btn[data-operation="reset"],
+.btn[data-operation="delete"] {
   color: var(--color-reset-delete);
 }
 
