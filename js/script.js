@@ -21,7 +21,7 @@ body.addEventListener('click', (e) => {
 
 const display = document.querySelector('.result')
 const allBtns = document.querySelector('.all-btns')
-const operand = document.querySelector('.operand')
+const operation = document.querySelector('.operation')
 
 
 let currentOperand = ''
@@ -56,6 +56,7 @@ const setOperator = (operator) => {
         // Если нажали на один оператор, потом на другой
         console.log('Сменили оператора')
         currentOperator = operator
+        showCurrentOperation(`${firstOperand} ${currentOperator}`)
         return
     }
     if (firstOperand === 0) {
@@ -67,11 +68,13 @@ const setOperator = (operator) => {
     } else {
         isWaitingSecondNumber = true
         console.log('Считаем результат')
-        // Считаем и заносим результат в переменную currentOperand на случай, если дальше продолжим считать
+        // Нажали на + - * или /. Считаем и заносим результат в переменную currentOperand для дальнейших операций
         firstOperand = String(calculateResult[operator](firstOperand, currentOperand))
         currentOperand = ''
         showOnDisplay(firstOperand)
     }
+    showCurrentOperation(`${firstOperand} ${currentOperator}`)
+
     isWaitingNextValue = true
     currentOperator = operator
 }
@@ -97,15 +100,17 @@ const calculateResult = {
 }
 
 const calcResult = () => {
-    console.log('Равно')
     if (firstOperand === 0) return
+    showCurrentOperation(`${firstOperand} ${currentOperator} ${currentOperand} =`)
     firstOperand = String(calculateResult[currentOperator](firstOperand, currentOperand))
     showOnDisplay(firstOperand)
     currentOperand = ''
 }
 
 const deleteLastDigit = () => {
+    // Если ничего не вводили, ничего не делаем
     if (currentOperand === '') return
+    // Если показывается одно число, то при удалении заменяем его на ноль
     if (currentOperand.length === 1) {
         currentOperand = ''
         showOnDisplay('0')
@@ -121,6 +126,7 @@ const resetAll = () => {
     currentOperator = ''
     isWaitingNextValue = false
     showOnDisplay('0')
+    showCurrentOperation('')
 }
 
 function showOnDisplay(str) {
@@ -134,5 +140,10 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') calcResult()
     if (e.key === 'Backspace') deleteLastDigit()
 })
+
+function showCurrentOperation(item) {
+    operation.innerHTML = `${item}`
+}
+
 
 
