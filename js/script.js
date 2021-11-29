@@ -35,12 +35,6 @@ allBtns.addEventListener('click', (e) => {
     if (e.target.getAttribute('operation') === 'reset') resetAll()
     if (e.target.getAttribute('operation') === 'equals') calcResult()
     if (e.target.getAttribute('operation') === 'delete') deleteLastDigit()
-
-    // Для тестирования
-    console.log(`currentOperand: ${currentOperand}`)
-    console.log(`firstOperand: ${firstOperand}`)
-    console.log(`currentOperator: ${currentOperator}`)
-    console.log('    ')
 })
 
 // При вводе числа
@@ -54,7 +48,6 @@ const setCurrentOperand = (number) => {
 const setOperator = (operator) => {
     if (isWaitingNextValue && currentOperator) {
         // Если нажали на один оператор, потом на другой
-        console.log('Сменили оператора')
         currentOperator = operator
         showCurrentOperation(`${firstOperand} ${currentOperator}`)
         return
@@ -67,40 +60,28 @@ const setOperator = (operator) => {
         showOnDisplay('0')
     } else {
         isWaitingSecondNumber = true
-        console.log('Считаем результат')
         // Нажали на + - * или /. Считаем и заносим результат в переменную currentOperand для дальнейших операций
         firstOperand = String(calculateResult[operator](firstOperand, currentOperand))
         currentOperand = ''
         showOnDisplay(firstOperand)
     }
-    showCurrentOperation(`${firstOperand} ${currentOperator}`)
 
+    showCurrentOperation(`${firstOperand} ${currentOperator}`)
     isWaitingNextValue = true
     currentOperator = operator
 }
 
 
 const calculateResult = {
-    '+': () => {
-        console.log('Выполняем сложение')
-        return Number(firstOperand) + Number(currentOperand)
-    },
-    '-': () => {
-        console.log('Выполняем вычитание')
-        return Number(firstOperand) - Number(currentOperand)
-    },
-    '*': () => {
-        console.log('Выполняем умножение')
-        return Number(firstOperand) * Number(currentOperand)
-    },
-    '/': () => {
-        console.log('Выполняем деление')
-        return Number(firstOperand) / Number(currentOperand)
-    }
+    '+': () => Number(firstOperand) + Number(currentOperand),
+    '-': () => Number(firstOperand) - Number(currentOperand),
+    '*': () => Number(firstOperand) * Number(currentOperand),
+    '/': () => Number(firstOperand) / Number(currentOperand)
 }
 
 const calcResult = () => {
     if (firstOperand === 0) return
+    
     showCurrentOperation(`${firstOperand} ${currentOperator} ${currentOperand} =`)
     firstOperand = String(calculateResult[currentOperator](firstOperand, currentOperand))
     showOnDisplay(firstOperand)
@@ -129,21 +110,17 @@ const resetAll = () => {
     showCurrentOperation('')
 }
 
-function showOnDisplay(str) {
-    display.textContent = `${str}`
-}
+const showOnDisplay = (str) => display.textContent = `${str}`
 
 document.addEventListener('keydown', (e) => {
-    if (e.key >= 0 || e.key <= 9) setCurrentOperand(e.key)
+    if (e.key >= 0 || e.key <= 9 || e.key === '.') setCurrentOperand(e.key)
     if (e.key === '-' || e.key === '+' || e.key === '*' || e.key === '/') setOperator(e.key)
     if (e.key === 'Escape') resetAll()
     if (e.key === 'Enter') calcResult()
     if (e.key === 'Backspace') deleteLastDigit()
 })
 
-function showCurrentOperation(item) {
-    operation.innerHTML = `${item}`
-}
+const showCurrentOperation = (item) => operation.innerHTML = `${item}`
 
 
 

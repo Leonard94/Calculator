@@ -2,7 +2,7 @@ body {
   --color-number: #ffffff;
   --color-operation: #26f0cd;
   --color-reset-delete: #e26364;
-  --color-bg: #f4f3f3;
+  --color-bg: #4d516d;
   --color-calculator-bg: #22252d;
   --color-calculator-bg-second: #313540;
   --color-icon-active: #ffffff;
@@ -32,6 +32,7 @@ body {
   justify-content: center;
   background: var(--color-bg);
   user-select: none;
+  transition: all 0.5s ease-in;
 }
 .calculator {
   width: 309px;
@@ -128,15 +129,16 @@ input, .icon {
   transition: transform 0.2s ease;
   transition: background-color 0.5s ease-in;
 }
-.btn[data-operation] {
+.btn[operator] {
   color: var(--color-operation);
 }
 
-.btn[data-operation="="] {
+.btn[operation="equals"] {
   grid-row-start: span 2;
+  color: var(--color-operation);
 }
-.btn[data-operation="reset"],
-.btn[data-operation="delete"] {
+.btn[operation="reset"],
+.btn[operation="delete"] {
   color: var(--color-reset-delete);
 }
 
@@ -144,6 +146,5 @@ input, .icon {
   box-shadow: var(--box-shadow-hover);
 }
 .btn:active {
-  /* transform: scale(0.9); */
   box-shadow: var(--box-shadow-active);
 }
